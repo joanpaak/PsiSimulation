@@ -1,0 +1,140 @@
+header {
+    font-size: 3rem;
+    /*font-family: serif; */
+    font-variant: small-caps;
+    text-align: center;
+    letter-spacing: 4px;
+    margin: 0.5ch 0;
+}
+
+body {
+    margin: 0 10%;
+}
+
+select{
+    background-color: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid black;
+    padding: 0.5ch 1ch;
+}
+
+select:hover{
+    background-color: whitesmoke;
+}
+
+.numInput {
+    width: 5ch;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+    /* font-family: monospace; */
+}
+
+h2 {
+    /* font-family: serif; */
+    font-weight: 100;
+    letter-spacing: 4px;
+    font-variant: small-caps;
+    border-bottom: 1px solid black;
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+h3,
+h4 {
+    font-size: 1.0rem;
+    /* font-family: serif; */
+    font-weight: 100;
+    font-variant: small-caps;
+    text-decoration: underline;
+}
+
+h4 {}
+
+table td:nth-of-type(odd) {
+    text-align: right;
+    ;
+}
+
+svg {
+    flex: 1 1 auto;   /* take remaining space */
+    width: 100%;
+    height: 100%;    /* fill the remaining flex height */
+}
+
+.figGrid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.figView {
+    object-fit: contain;
+    display: flex;
+    flex-direction: column;
+    width: max(400px, 30vw);
+    aspect-ratio: 3 / 2;
+}
+
+.figView h4{
+    text-align: center;  
+    margin: 0;        /* important: prevents extra height from default margins */
+    flex: 0 0 auto;   /* take only its content height */
+}
+
+.figureLine {
+    stroke: rgba(0, 0, 0, 0.474);
+}
+
+.figureLine:hover {
+    stroke: red;
+    cursor: pointer;
+}
+
+/* Special stuff */
+
+.errorMessage {
+    padding: 0.5rem 1rem;
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.bottomMargin{
+    margin-bottom: 1rem;
+}
+
+
+.menu{
+    text-align: center;
+}
+
+.menuItem{
+    display: inline-block;
+    font-weight: 100;
+    font-size: 1.5rem;
+    font-variant: small-caps;
+    margin: 0 3ch;
+}
+
+.menuItem:hover{
+    color: rgb(160, 0, 0);
+    cursor: pointer;
+}
+
+.menuItem:active{
+    color: red;
+}
+
+#introductionnDiv{
+    display: none;
+}
+
+#simulationDiv{
+    display: none;
+}
+
+.eq{
+    text-align: center;
+}

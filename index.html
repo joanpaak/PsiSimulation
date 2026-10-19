@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        </style>
+        <link rel="styleSheet" href="css/style.css">
+        <link rel="shortcut icon" href="#">
+        <title>&Psi; sim</title>
+    </head>
+    <body>
+        <header>Simulate &Psi;</header>
+
+        <div class="menu">
+            <div class="menuItem" id="switchIntroductionBtn">Introduction</div>
+            <div class="menuItem" id="switchSimulationBtn">Simulation</div>
+        </div>
+        
+        <div id="introductionDiv">
+            <p>This JavaScript program simulates a Yes/No task in which the (simulated) participants are presented with stimuli of differing intensties and are required to responed, well, either Yes or No to if they detected to stimulus or not.</p>
+    
+            <p>A simple psychometric function, &Psi;, is used for generating the simulated responses and for statistical inference.</p> 
+            
+            <div class="eq">&Psi;(s; theta = {c, &sigma;}) = c + s/&sigma; <br>
+            P(s; Yes) = &Phi;(&Psi;(s, theta))</div>
+
+            <p>This function has two parameters, one corresponding the the <em>criterion</em> or the propensity of the participant to respond <em>Yes</em> and the other, sigma (&sigma;) corresponding to noise in the detection system. The latter is related to the detection threshold. The function &Phi; is the cumulative distribution function of normal distribution.</p>
+
+            <p>You can select three different stimulus selection schemes. On selects random stimuli, one places stimuli at the posterior mean of the threshold estimate and one attempts to minimise posterior entropy.</p>
+        </div>
+
+        <div id="simulationDiv">
+            <h2>Settings</h2>
+
+            <h3>Stimulus selection</h3>
+
+            <table>
+                <tr>
+                    <td>Selection scheme:</td>
+                    <td>
+                        <select id="stimSelectScheme">
+                            <option>Random</option>
+                            <option>Posterior mean</option>
+                            <option>Minimise entropy</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Minimum value:</td>
+                    <td><input class="numInput" value="0.1" id="minStim"></td>
+                </tr>
+                <tr>
+                    <td>Maximum value:</td>
+                    <td><input class="numInput" value="40" id="maxStim"></td>
+                </tr>
+                <tr>
+                    <td>Probability of catch trial:</td>
+                    <td><input class="numInput" value="0.2" id="pCatchTrial"></td>
+                </tr>
+            </table>
+
+            <h3>Prior</h3>
+
+            <table>
+                <tr>
+                    <td>Criterion</td>
+                    <td> &sim; Normal(<input class="numInput" type="text" id="priorCrit1" value="-1">, <input class="numInput" type="text" id="priorCrit2" value="0.5">)</td>
+                </tr>
+                <tr>
+                    <td>Sigma</td>
+                    <td> &sim; Gamma(<input class="numInput" type="text" id="priorSigma1" value="2">, <input class="numInput" type="text" id="priorSigma2" value="0.5">)</td>
+                </tr>
+            </table>
+
+            <h3>Generating parameters</h3>
+
+            <table>
+                <tr>
+                    <td>Criterion</td>
+                    <td> &sim; Uniform(<input class="numInput" type="text" id="genCrit1" value="-2">, <input class="numInput" type="text" id="genCrit2" value="-1">)</td>
+                </tr>
+                <tr>
+                    <td>Sigma</td>
+                    <td> &sim; Uniform(<input class="numInput" type="text" id="genSigma1" value="0.5">, <input class="numInput" type="text" id="genSigma2" value="5">)</td>
+                </tr>
+            </table>
+
+            <h3>Experiment</h3>
+
+            <table>
+                <tr>
+                    <td>N trials:</td>
+                    <td><input type="text" class="numInput" id="nTrials" value="100"></td>
+                </tr>
+                <tr>
+                    <td>N simulations:</td>
+                    <td><input type="text" id="nSim" class="numInput" value="20"></td>
+                </tr>
+            </table>
+
+            <h3>Run simulations</h3>
+
+            <button id="startWorkerBtn">Start</button>
+            <button id="terminateWorkerBtn">Stop</button>
+            <p><span id="nSimDoneSpan">0</span>/<span id="nSimSpan">0</span> simulations done.</p>
+
+            <h2>Results</h2>
+
+            <h3>Aggregate results</h3>
+
+            <div class="figGrid">
+                <div class="figView">
+                    <h4>Error in criterion</h4>
+                    <svg id="tbtCritFig"></svg>
+                </div>
+    
+                <div class="figView">
+                    <h4>Error in &sigma;</h4>
+                    <svg id="tbtSigmaFig"></svg>
+                </div>
+            </div>
+
+            <h3>Examine individual runs</h3>
+
+            <div class="bottomMargin">
+                <table>
+                    <tr>
+                        <td>Select simulation:</td>
+                        <td>
+                            <select id="individualRunSelector"></select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="figGrid">
+                <div class="figView">
+                    <h4>Stimuli</h4>
+                    <svg id="individualS"></svg>
+                </div>
+    
+                <!-- TODO: Draw psychometric function -->
+                <div class="figView">
+                    <h4>S/R</h4>
+                    <svg id="individualSR"></svg>
+                </div>
+
+                <div class="figView">
+                    <h4>Posterior samples</h4>
+                    <svg id="pairwisePlot"></svg>
+                </div>
+    
+                <!-- TODO: Add in next version -->
+                <!--div class="figView">
+                    <h4>Criterion</h4>
+                    <svg id="individualTbtCrit"></svg>
+                </div>
+    
+                <div class="figView">
+                    <h4>&sigma;</h4>
+                    <svg id="individualTbtSigma"></svg>
+                </div-->
+            </div>
+
+
+        </div>
+    </body>
+    <script src="js/main.js" type="module"></script>
+</html>
